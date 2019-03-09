@@ -32,6 +32,7 @@ namespace ScoreSheets
         List<string> registranceNumbers;
 
         List<string> fullSeasonEventsNames;
+        List<string> fullSeasonEventsNumbers;
         List<string> USACMemberNames;
         List<string> USACMemberNumbers;
         List<string> collegiateMembers;
@@ -81,6 +82,7 @@ namespace ScoreSheets
             registranceNumbers = new List<string>();
 
             fullSeasonEventsNames = new List<string>();
+            fullSeasonEventsNumbers = new List<string>();
             USACMemberNames = new List<string>();
             USACMemberNumbers = new List<string>();
             collegiateMembers = new List<string>();
@@ -286,6 +288,7 @@ namespace ScoreSheets
 
                 //find what columns the info we need is located
                 int namesColumn = 0;
+                int numbersColumn = 0;
 
                 for (int column = start.Row; column <= end.Column; column++)
                 {
@@ -297,6 +300,10 @@ namespace ScoreSheets
                     {
                         namesColumn = column;
                     }
+                    else if (worksheet.Cells[1, column].GetValue<string>().Equals("Member No."))
+                    {
+                        numbersColumn = column;
+                    }
                 }
 
                 //now read through the rest of the information
@@ -307,6 +314,11 @@ namespace ScoreSheets
                         if (col == namesColumn)
                         {
                             fullSeasonEventsNames.Add(worksheet.Cells[row, col].GetValue<string>());
+                        }
+
+                        if(col == numbersColumn)
+                        {
+                            fullSeasonEventsNumbers.Add(worksheet.Cells[row, col].GetValue<string>());
                         }
                     }
                 }
@@ -398,7 +410,7 @@ namespace ScoreSheets
                 }
 
                 //now read through the rest of the information
-                for (int row = start.Row; row <= end.Row; row++)
+                for (int row = start.Row + 1; row <= end.Row; row++)
                 { // Row by row...
                     for (int col = start.Column; col <= end.Column; col++)
                     { // ... Cell by cell...
@@ -491,6 +503,8 @@ namespace ScoreSheets
             for(int i = 0; i < registranceNames.Count(); i++)
             {
                 errorFound = false;
+
+                
                 //check if name is in USAC membership check sheet
                 if (!USACMemberNames.Contains(registranceNames[i]))
                 {
@@ -514,10 +528,22 @@ namespace ScoreSheets
                 //see if there name comes up in the full season events names sheet
                 if (!fullSeasonEventsNames.Contains(registranceNames[i]))
                 {
-                    int num = i + 2;
-                    numbers.Add(num);
-                    writeToFile.Add("[" + num + "] The member [" + registranceNames[i] + " " + registranceNumbers[i] + "] could" +
+                    //if they are not in the usac member names but the 
+                    //number is correct they signed up under the wrong name
+                    if (fullSeasonEventsNumbers.Contains(registranceNumbers[i]))
+                    {
+                        int num = i + 2;
+                        numbers.Add(num);
+                        writeToFile.Add("[" + num + "] The member [" + registranceNames[i] + " " + registranceNumbers[i] + "] is listed under the wrong name" +
+                            " on the full seasons events sheet.");
+                    }
+                    else
+                    {
+                        int num = i + 2;
+                        numbers.Add(num);
+                        writeToFile.Add("[" + num + "] The member [" + registranceNames[i] + " " + registranceNumbers[i] + "] could" +
                                         " not be found in the full seasons events sheet.");
+                    }
                     errorFound = true;
                 }
                 //see if it comes up in the collegiate member check
