@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ScoreSheets</name>
+    </assembly>
+    <members>
+        <member name="T:ScoreSheets.Controller">
+            <summary>
+            Does all the backend work
+            takes in spreadsheets, scans the info we want, and compares them
+            </summary>
+        </member>
+        <member name="M:ScoreSheets.Controller.#ctor(ScoreSheets.View)">
+            <summary>
+            Constructs the controller taking a Model gui as a paramater
+            </summary>
+            <param name="view"></param>
+        </member>
+        <member name="M:ScoreSheets.Controller.SelectFile2">
+            <summary>
+            For regionals check, scan through 4 different files:
+            1. Regionals Registrance
+            2. All Seasons Events
+            3. USAC membership check
+            4. Collegiate membership check
+            </summary>
+        </member>
+        <member name="M:ScoreSheets.Controller.ScanThroughRegionalsRegistrance">
+            <summary>
+            Scans through the regionals registrance sheet and extracts the 
+            names and numbers of the competitors listed
+            </summary>
+        </member>
+        <member name="M:ScoreSheets.Controller.ScanThroughFullSeasonsEvents">
+            <summary>
+            scans through the full seasons events sheet
+            </summary>
+        </member>
+        <member name="M:ScoreSheets.Controller.ScanThroughUSACMembership">
+            <summary>
+            scans through the USAC membership check sheet
+            </summary>
+        </member>
+        <member name="M:ScoreSheets.Controller.ScanThroughCollegiateMembership">
+            <summary>
+            scans through the collegiate membership check sheet
+            </summary>
+        </member>
+        <member name="M:ScoreSheets.Controller.CheckRegionalsTest(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary>
+            THIS IS A HELPER METHOD USED FOR TESTING ONLY, instead of using the global variables it
+            takes in its own lists as paramaters.
+            </summary>
+            <param name="people"></param>
+            <param name="memberNumbers"></param>
+            <param name="allSeason"></param>
+            <param name="USACPeople"></param>
+            <param name="USAClimbingMember"></param>
+            <param name="collegiateMember"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ScoreSheets.Controller.CheckRegionalsSheets">
+            <summary>
+            check the regionals signees against the other spreadsheets
+            </summary>
+        </member>
+        <member name="M:ScoreSheets.Controller.SelectFile1">
+            .....................................................................................................
+            CODE FOR DIVISIONALS/NATIONALS CHECK:
+            .....................................................................................................
+            
+            <summary>
+            has the user select two files and saves the paths in field variables
+            </summary>
+        </member>
+        <member name="M:ScoreSheets.Controller.ScanThroughSighneesXML">
+            ................................................
+            FOR READING THROUGH EXCEL FILES, CODE FOR REGIONALS/NATIONALS CHECK
+            ................................................
+            <summary>
+            scans through an xml file using epplus
+            </summary>
+        </member>
+        <member name="M:ScoreSheets.Controller.ScanThroughRegistrantsXML">
+            <summary>
+            scans through the results list and saves the names, member info, and weather they qualified
+            </summary>
+        </member>
+        <member name="E:ScoreSheets.IView.SelectFilePressed">
+            <summary>
+            fires if a user tries to register for some boggle
+            </summary>
+        </member>
+        <member name="F:ScoreSheets.View.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ScoreSheets.View.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ScoreSheets.View.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:ScoreSheets.Launch.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:ScoreSheets.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:ScoreSheets.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:ScoreSheets.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>
